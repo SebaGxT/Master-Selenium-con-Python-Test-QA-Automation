@@ -20,3 +20,14 @@ class Funciones_Globales():
 
     def saludos(self):
         print('Bienvenido a Page Object Model')
+    
+    def Tiempo(self,tiempo):
+        t = time.sleep(tiempo)
+        return t
+
+    def navegar(self,url):
+        self.driver.get(url)
+    
+    def navegar2(self,url,tiempo):
+        self.driver.get(url)
+        Funciones_Globales.Tiempo(self,tiempo)
