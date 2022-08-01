@@ -22,8 +22,8 @@ class base_test(unittest.TestCase):
         time.sleep(t)
 
     def test(self):
-        f = FG(dri)
-        f.saludos()
+        Fun = FG(dri)
+        Fun.saludos()
         
     def tearDown(self):
         dri.quit()

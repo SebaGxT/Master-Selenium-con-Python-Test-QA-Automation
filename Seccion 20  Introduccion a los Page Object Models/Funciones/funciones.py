@@ -1,5 +1,4 @@
 import time
-import unittest
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
@@ -31,3 +30,26 @@ class Funciones_Globales():
     def navegar2(self,url,tiempo):
         self.driver.get(url)
         Funciones_Globales.Tiempo(self,tiempo)
+
+    def texto_Xpath(self,xpath,text,tiempo):
+        val = self.driver.find_element(By.XPATH,xpath)
+        val.clear()
+        val.send_keys(text)
+        Funciones_Globales.Tiempo(self,tiempo)
+    
+    def texto_ID(self,Id,text,tiempo):
+        val = self.driver.find_element(By.ID,Id)
+        val.clear()
+        val.send_keys(text)
+        Funciones_Globales.Tiempo(self,tiempo)
+
+    def texto_Xpath_Valida(self,xpath,text,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.XPATH,xpath)))
+            val = self.driver.find_element(By.XPATH,xpath)
+            val.clear()
+            val.send_keys(text)
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + xpath)

@@ -19,9 +19,9 @@ class base_test(unittest.TestCase):
         
     def test(self):
 
-        T = FG(dri)
+        Fun = FG(dri)
         print('Esperar')
-        T.Tiempo(5)
+        Fun.Tiempo(5)
         
     def tearDown(self):
         dri.quit()

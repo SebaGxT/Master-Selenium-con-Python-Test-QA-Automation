@@ -1,4 +1,4 @@
-# Funcion Navegar
+# Mejorando la Funcion Texto con Xpath
 
 import unittest
 from selenium import webdriver
@@ -9,6 +9,8 @@ from selenium.webdriver.support.ui import WebDriverWait as WW
 from selenium.common.exceptions import TimeoutException as TOE
 from Funciones.funciones import Funciones_Globales as FG
 
+t = 1
+
 class base_test(unittest.TestCase):
 
     def setUp(self):
@@ -18,11 +20,9 @@ class base_test(unittest.TestCase):
         Fun = FG(dri)
 
     def test(self):
-        Fun.navegar('https://google.com.ar')
-        Fun.Tiempo(2)
-
-    def test2(self):
-        Fun.navegar2('https://twitter.com',2)
+        Fun.navegar2('https://saucedemo.com',t)
+        Fun.texto_Xpath_Valida("//input[@id='user-nam']","standard_user",t)
+        Fun.texto_Xpath_Valida("//input[@id='passwor']","secret_sauce",t)
         
     def tearDown(self):
         dri.quit()

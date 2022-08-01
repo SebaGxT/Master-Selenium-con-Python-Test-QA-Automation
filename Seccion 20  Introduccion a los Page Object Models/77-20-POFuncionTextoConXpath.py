@@ -1,4 +1,4 @@
-# Funcion Navegar
+# Funcion Texto con Xpath
 
 import unittest
 from selenium import webdriver
@@ -18,11 +18,9 @@ class base_test(unittest.TestCase):
         Fun = FG(dri)
 
     def test(self):
-        Fun.navegar('https://google.com.ar')
-        Fun.Tiempo(2)
-
-    def test2(self):
-        Fun.navegar2('https://twitter.com',2)
+        Fun.navegar2('https://saucedemo.com',2)
+        Fun.texto_Xpath("//input[@id='user-name']","standard_user",2)
+        Fun.texto_Xpath("//input[@id='password']","secret_sauce",2)
         
     def tearDown(self):
         dri.quit()
