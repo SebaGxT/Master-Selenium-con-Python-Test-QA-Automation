@@ -33,12 +33,14 @@ class Funciones_Globales():
 
     def texto_Xpath(self,xpath,text,tiempo):
         val = self.driver.find_element(By.XPATH,xpath)
+        val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
         val.clear()
         val.send_keys(text)
         Funciones_Globales.Tiempo(self,tiempo)
     
     def texto_ID(self,Id,text,tiempo):
         val = self.driver.find_element(By.ID,Id)
+        val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
         val.clear()
         val.send_keys(text)
         Funciones_Globales.Tiempo(self,tiempo)
@@ -46,6 +48,7 @@ class Funciones_Globales():
     def texto_Xpath_Valida(self,xpath,text,tiempo):
         try:
             val = WW(self.driver,5).until(EC.visibility_of_element_located((By.XPATH,xpath)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
             val = self.driver.find_element(By.XPATH,xpath)
             val.clear()
             val.send_keys(text)
@@ -53,3 +56,37 @@ class Funciones_Globales():
         except TOE as toe:
             print(toe.msg)
             print('No se enconto el elemento' + xpath)
+    
+    def texto_ID_Valida(self,Id,text,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.ID,Id)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.ID,Id)
+            val.clear()
+            val.send_keys(text)
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + Id)
+    
+    def Click_Xpath_Valida(self,xpath,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.XPATH,xpath)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.XPATH,xpath)
+            val.click()
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + xpath)
+    
+    def Click_ID_Valida(self,Id,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.ID,Id)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.ID,Id)
+            val.click()
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + Id)

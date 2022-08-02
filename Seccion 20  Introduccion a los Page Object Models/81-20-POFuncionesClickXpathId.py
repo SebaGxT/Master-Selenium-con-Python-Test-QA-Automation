@@ -1,4 +1,4 @@
-# Mejorando la Funcion Texto con Xpath
+# Funciones Click Xpath y ID
 
 import unittest
 from selenium import webdriver
@@ -23,6 +23,7 @@ class base_test(unittest.TestCase):
         Fun.navegar2('https://saucedemo.com',t)
         Fun.texto_Xpath_Valida("//input[@id='user-name']","standard_user",t)
         Fun.texto_Xpath_Valida("//input[@id='password']","secret_sauce",t)
+        Fun.Click_Xpath_Valida("//input[contains(@id,'login-button')]",t)
         
     def tearDown(self):
         dri.quit()
