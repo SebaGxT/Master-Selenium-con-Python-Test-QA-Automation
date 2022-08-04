@@ -105,16 +105,21 @@ class Funciones_Globales():
             val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
             val = self.driver.find_element(By.XPATH,xpath)
             val = Select(val)
-            op = str.lower(op)
-            if op == "text":
-                val.select_by_visible_text(sel)
-                print(f'Opcion de la lista {xpath} seleccionada por texto: {sel}')
-            elif op == "value":
-                val.select_by_value(sel)
-                print(f'Opcion de la lista {xpath} seleccionada por valor: {sel}')
-            elif op == "index":
-                val.select_by_index(sel)
-                print(f'Opcion de la lista {xpath} seleccionada por indice: {sel}')
+            try:
+                op = str.lower(op)
+                if op == "text":
+                    val.select_by_visible_text(sel)
+                    print(f'Opcion de la lista {xpath} seleccionada por texto: {sel}')
+                elif op == "value":
+                    val.select_by_value(sel)
+                    print(f'Opcion de la lista {xpath} seleccionada por valor: {sel}')
+                elif op == "index":
+                    val.select_by_index(sel)
+                    print(f'Opcion de la lista {xpath} seleccionada por indice: {sel}')
+                else:
+                    print(f'El valor {op} ingresado no corresponde a una accion valida. Debe ingresar como parametro /"text/" - /"value/" - /"index/"')
+            except TOE as toe:
+                print(toe.msg)
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
@@ -126,16 +131,21 @@ class Funciones_Globales():
             val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
             val = self.driver.find_element(By.ID,Id)
             val = Select(val)
-            op = str.lower(op)
-            if op == "text":
-                val.select_by_visible_text(sel)
-                print(f'Opcion de la lista {Id} seleccionada por texto: {sel}')
-            elif op == "value":
-                val.select_by_value(sel)
-                print(f'Opcion de la lista {Id} seleccionada por valor: {sel}')
-            elif op == "index":
-                val.select_by_index(sel)
-                print(f'Opcion de la lista {Id} seleccionada por indice: {sel}')
+            try:
+                op = str.lower(op)
+                if op == "text":
+                    val.select_by_visible_text(sel)
+                    print(f'Opcion de la lista {Id} seleccionada por texto: {sel}')
+                elif op == "value":
+                    val.select_by_value(sel)
+                    print(f'Opcion de la lista {Id} seleccionada por valor: {sel}')
+                elif op == "index":
+                    val.select_by_index(sel)
+                    print(f'Opcion de la lista {Id} seleccionada por indice: {sel}')
+                else:
+                    print(f'El valor {op} ingresado no corresponde a una accion valida. Debe ingresar como parametro /"text/" - /"value/" - /"index/"')
+            except TOE as toe:
+                print(toe.msg)
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)

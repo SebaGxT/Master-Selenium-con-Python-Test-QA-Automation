@@ -28,6 +28,9 @@ class base_test(unittest.TestCase):
         f.Tiempo(3)
         f.Select_Lista_Id_Valida('select-demo','index','6',t)
         f.Tiempo(3)
+        f.Select_Lista_Id_Valida('select-demo','valu','Sunday',t)
+        f.Select_Lista_Id_Valida('select-demo','tex','Tuesday',t)
+        f.Select_Lista_Id_Valida('select-demo','inde','6',t)
     
     def test2(self):
         f = FG(dri)
@@ -38,6 +41,9 @@ class base_test(unittest.TestCase):
         f.Tiempo(3)
         f.Select_Lista_Xpath_Valida("//select[contains(@id,'select-demo')]",'index','6',t)
         f.Tiempo(3)
+        f.Select_Lista_Xpath_Valida("//select[contains(@id,'select-demo')]",'valu','Sunday',t)
+        f.Select_Lista_Xpath_Valida("//select[contains(@id,'select-demo')]",'tex','Tuesday',t)
+        f.Select_Lista_Xpath_Valida("//select[contains(@id,'select-demo')]",'inde','6',t)
 
     def tearDown(self):
         dri.quit()
