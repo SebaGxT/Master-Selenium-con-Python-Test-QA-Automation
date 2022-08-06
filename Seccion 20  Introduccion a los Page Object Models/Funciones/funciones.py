@@ -2,6 +2,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select
+from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as WW
 from selenium.common.exceptions import TimeoutException as TOE
@@ -146,6 +147,54 @@ class Funciones_Globales():
                     print(f'El valor {op} ingresado no corresponde a una accion valida. Debe ingresar como parametro /"text/" - /"value/" - /"index/"')
             except TOE as toe:
                 print(toe.msg)
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + Id)
+
+    def Upload_File_Xpath_Valida(self,xpath,url,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.XPATH,xpath)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.XPATH,xpath)
+            val.send_keys(url)
+            print(f'Se cargo el archivo {url} en el elemento {xpath}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + xpath)
+    
+    def Upload_File_Id_Valida(self,Id,url,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.ID,Id)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.ID,Id)
+            val.send_keys(url)
+            print(f'Se cargo el archivo {url} en el elemento {Id}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + Id)
+
+    def CheckBox_RadioButton_Xpath_Valida(self,xpath,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.XPATH,xpath)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.XPATH,xpath)
+            val.click()
+            print(f'Se selecciono el elemento {xpath}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + xpath)
+    
+    def CheckBox_RadioButton_Id_Valida(self,Id,tiempo):
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((By.ID,Id)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(By.ID,Id)
+            val.click()
+            print(f'Se selecciono el elemento {Id}')
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)

@@ -8,7 +8,6 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as WW
 from selenium.common.exceptions import TimeoutException as TOE
 from Funciones.funciones import Funciones_Globales as FG
-from Funciones.Page_Login import Page_Login as PL
 
 t = 1
 
