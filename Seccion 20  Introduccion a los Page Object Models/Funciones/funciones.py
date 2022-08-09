@@ -1,3 +1,4 @@
+from math import isnan
 import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -199,3 +200,42 @@ class Funciones_Globales():
         except TOE as toe:
             print(toe.msg)
             print('No se enconto el elemento' + Id)
+
+    def CheckBoxMul_RadioButton_Xpath_Valida(self,xpath,cantI,cantF,tiempo):
+        try:
+            if type(cantI) == str and type(cantF) == str:
+                print('No se puede realizar el proceso debe ingresar al menos un parametro en inicio o fin')
+            else:
+                I = True
+                F = True
+                if type(cantI) == str:
+                    if str.isnumeric(cantI):
+                        cantF = int(cantI) + 1
+                    else:
+                        print(f'No es posible convertir {cantI} a int')
+                        I = False
+                if type(cantF) == str:
+                    if str.isnumeric(cantF):
+                        cantF = int(cantF) + 1
+                    else:
+                        print(f'No es posible convertir {cantF} a int')
+                        F = False
+                if I == True and F == True:
+                    if cantI <= cantF:
+                        try:
+                            for n in range(cantI,cantF):
+                                xpath2 = str(xpath + "[" + str(n) + "]")
+                                Funciones_Globales.CheckBox_RadioButton_Xpath_Valida(self,xpath2,tiempo)
+                        except TOE as toe:
+                            print(toe.msg)
+                            print('No se enconto el elemento' + xpath)
+                    else:
+                        print('No se puede realizar el proceso ya que cantF es menor a cantI')
+                else:
+                    if I == False:
+                        print(f'El parametro {cantI} debe ser numerico')
+                    if F == False:
+                        print(f'El parametro {cantF} debe ser numerico')
+        except TOE as toe:
+            print(toe.msg)
+            print('hubo un error')

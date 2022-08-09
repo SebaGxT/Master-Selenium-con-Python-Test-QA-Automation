@@ -20,8 +20,7 @@ class base_test(unittest.TestCase):
     def test(self):
         f = FG(dri)
         f.navegar2('https://demo.seleniumeasy.com/basic-checkbox-demo.html',t)
-        for n in range(2,6):    
-            f.CheckBox_RadioButton_Xpath_Valida("(//input[contains(@type,'checkbox')])["+str(n)+"]",t)
+        f.CheckBoxMul_RadioButton_Xpath_Valida("(//input[contains(@type,'checkbox')])",2,5,t)
         
     def tearDown(self):
         dri.quit()
