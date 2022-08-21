@@ -10,7 +10,7 @@ class CompletarDatosExcel(unittest.TestCase):
 
     def setUp(self):
         global dri
-        dri=FG.driverCh()
+        dri=FG.driverFi()
         global drifg
         drifg = FG(dri)
         global funex

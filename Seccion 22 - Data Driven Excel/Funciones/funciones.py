@@ -18,6 +18,22 @@ class Funciones_Globales():
         driver=webdriver.Chrome(chrome_options=ops)
         return driver
     
+    def driverChexe(url):
+        ops = webdriver.ChromeOptions()
+        ops.add_argument('--start-maximized')
+        driver=webdriver.Chrome(chrome_options=ops,executable_path=url)
+        return driver
+    
+    def driverFi():
+        driver=webdriver.Firefox()
+        driver.maximize_window()
+        return driver
+    
+    def driverFiexe(url):
+        driver=webdriver.Firefox(executable_path=url)
+        driver.maximize_window()
+        return driver
+    
     def Tiempo(self,tiempo):
         t = time.sleep(tiempo)
         return t
