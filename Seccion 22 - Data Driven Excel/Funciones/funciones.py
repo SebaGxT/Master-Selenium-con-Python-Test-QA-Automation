@@ -176,3 +176,22 @@ class Funciones_Globales():
         except TOE as toe:
             print(toe.msg)
             print('hubo un error')
+    
+    def validar_elemento_visible(self,tipo,selector,tiempo):
+        if tipo == 'xpath':
+            tipo = By.XPATH
+        elif tipo == 'id':
+            tipo = By.ID
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(tipo,selector)
+            print(f'Se encontro el elemento {selector}')
+            Funciones_Globales.Tiempo(self,tiempo)
+            val = True
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento' + selector)
+            val = False
+        finally:
+            return val
