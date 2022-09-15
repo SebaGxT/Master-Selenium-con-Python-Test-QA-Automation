@@ -5,6 +5,7 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait as WW
+from selenium.webdriver import ActionChains as AC
 from selenium.common.exceptions import TimeoutException as TOE
 
 
@@ -35,16 +36,16 @@ class Funciones_Globales():
         driver.maximize_window()
         return driver
     
-    def Tiempo(self,tiempo):
+    def Tiempo(self,tiempo=.2):
         t = time.sleep(tiempo)
         return t
 
-    def navegar(self,url,tiempo):
+    def navegar(self,url,tiempo=.2):
         self.driver.get(url)
         print(f'Pagina abierta: {url}')
         Funciones_Globales.Tiempo(self,tiempo)
     
-    def insertar_texto(self,tipo,selector,text,tiempo):
+    def insertar_texto(self,tipo,selector,text,tiempo=.2):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
@@ -62,7 +63,7 @@ class Funciones_Globales():
             print(toe.msg)
             print('No se enconto el elemento ' + selector)
 
-    def Click_elemento(self,tipo,selector,tiempo):
+    def Click_elemento(self,tipo,selector,tiempo=.2):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
@@ -79,7 +80,7 @@ class Funciones_Globales():
             print(toe.msg)
             print('No se enconto el elemento ' + selector)
     
-    def Select_Lista(self,tipo,selector,op,sel,tiempo):
+    def Select_Lista(self,tipo,selector,op,sel,tiempo=.2):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
@@ -110,7 +111,7 @@ class Funciones_Globales():
             print(toe.msg)
             print('No se enconto el elemento ' + selector)
         
-    def Upload_File(self,tipo,selector,url,tiempo):
+    def Upload_File(self,tipo,selector,url,tiempo=.2):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
@@ -127,7 +128,7 @@ class Funciones_Globales():
             print(toe.msg)
             print('No se enconto el elemento ' + selector)
 
-    def CheckBox_RadioButton(self,tipo,selector,tiempo):
+    def CheckBox_RadioButton(self,tipo,selector,tiempo=.2):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
@@ -144,7 +145,7 @@ class Funciones_Globales():
             print(toe.msg)
             print('No se enconto el elemento ' + selector)
     
-    def CheckBoxMul_RadioButton(self,tipo,selector,cantI,cantF,tiempo):
+    def CheckBoxMul_RadioButton(self,tipo,selector,cantI,cantF,tiempo=.2):
         try:
             if type(cantI) == str and type(cantF) == str:
                 print('No se puede realizar el proceso debe ingresar al menos un parametro en inicio o fin')
@@ -183,7 +184,7 @@ class Funciones_Globales():
             print(toe.msg)
             print('hubo un error')
     
-    def validar_elemento_visible(self,tipo,selector,tiempo):
+    def validar_elemento_visible(self,tipo,selector,tiempo=.2):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
@@ -202,3 +203,57 @@ class Funciones_Globales():
             val = False
         finally:
             return val
+    
+    def doble_click_AC(self,tipo,selector,tiempo=.2):
+        tipo = str.lower(tipo)
+        if tipo == 'xpath':
+            tipo = By.XPATH
+        elif tipo == 'id':
+            tipo = By.ID
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(tipo,selector)
+            act = AC(self.driver)
+            act.double_click(val).perform()
+            print(f'Doble click en el elemento: {selector}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento ' + selector)
+    
+    def click_derecho_AC(self,tipo,selector,tiempo=.2):
+        tipo = str.lower(tipo)
+        if tipo == 'xpath':
+            tipo = By.XPATH
+        elif tipo == 'id':
+            tipo = By.ID
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(tipo,selector)
+            act = AC(self.driver)
+            act.context_click(val).perform()
+            print(f'Click derecho en el elemento: {selector}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento ' + selector)
+    
+    def click_AC(self,tipo,selector,tiempo=.2):
+        tipo = str.lower(tipo)
+        if tipo == 'xpath':
+            tipo = By.XPATH
+        elif tipo == 'id':
+            tipo = By.ID
+        try:
+            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
+            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+            val = self.driver.find_element(tipo,selector)
+            act = AC(self.driver)
+            act.click(val).perform()
+            print(f'Click en el elemento: {selector}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se enconto el elemento ' + selector)
