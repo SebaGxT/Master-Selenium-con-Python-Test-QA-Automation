@@ -45,16 +45,24 @@ class Funciones_Globales():
         print(f'Pagina abierta: {url}')
         Funciones_Globales.Tiempo(self,tiempo)
     
-    def insertar_texto(self,tipo,selector,text,tiempo=.2):
+    def definir_tipo(tipo):
         tipo = str.lower(tipo)
         if tipo == 'xpath':
             tipo = By.XPATH
         elif tipo == 'id':
             tipo = By.ID
+        return tipo
+    
+    def validar_elemento(self,tipo,selector):
+        val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
+        val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
+        val = self.driver.find_element(tipo,selector)
+        return val
+    
+    def insertar_texto(self,tipo,selector,text,tiempo=.2):
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             val.clear()
             val.send_keys(text)
             print(f'Escribiendo en el campo {selector} el texto: {text}')
@@ -64,15 +72,9 @@ class Funciones_Globales():
             print('No se enconto el elemento ' + selector)
 
     def Click_elemento(self,tipo,selector,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             val.click()
             print(f'Se da click en el elemento {selector}')
             Funciones_Globales.Tiempo(self,tiempo)
@@ -81,15 +83,9 @@ class Funciones_Globales():
             print('No se enconto el elemento ' + selector)
     
     def Select_Lista(self,tipo,selector,op,sel,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             val = Select(val)
             try:
                 op = str.lower(op)
@@ -112,15 +108,9 @@ class Funciones_Globales():
             print('No se enconto el elemento ' + selector)
         
     def Upload_File(self,tipo,selector,url,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             val.send_keys(url)
             print(f'Se cargo el archivo {url} en el elemento {selector}')
             Funciones_Globales.Tiempo(self,tiempo)
@@ -129,15 +119,9 @@ class Funciones_Globales():
             print('No se enconto el elemento ' + selector)
 
     def CheckBox_RadioButton(self,tipo,selector,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             val.click()
             print(f'Se selecciono el elemento {selector}')
             Funciones_Globales.Tiempo(self,tiempo)
@@ -185,15 +169,9 @@ class Funciones_Globales():
             print('hubo un error')
     
     def validar_elemento_visible(self,tipo,selector,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             print(f'Se encontro el elemento {selector}')
             Funciones_Globales.Tiempo(self,tiempo)
             val = True
@@ -205,15 +183,9 @@ class Funciones_Globales():
             return val
     
     def doble_click_AC(self,tipo,selector,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             act = AC(self.driver)
             act.double_click(val).perform()
             print(f'Doble click en el elemento: {selector}')
@@ -223,15 +195,9 @@ class Funciones_Globales():
             print('No se enconto el elemento ' + selector)
     
     def click_derecho_AC(self,tipo,selector,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             act = AC(self.driver)
             act.context_click(val).perform()
             print(f'Click derecho en el elemento: {selector}')
@@ -241,15 +207,9 @@ class Funciones_Globales():
             print('No se enconto el elemento ' + selector)
     
     def click_AC(self,tipo,selector,tiempo=.2):
-        tipo = str.lower(tipo)
-        if tipo == 'xpath':
-            tipo = By.XPATH
-        elif tipo == 'id':
-            tipo = By.ID
+        tipo = Funciones_Globales.definir_tipo(tipo)
         try:
-            val = WW(self.driver,5).until(EC.visibility_of_element_located((tipo,selector)))
-            val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
-            val = self.driver.find_element(tipo,selector)
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
             act = AC(self.driver)
             act.click(val).perform()
             print(f'Click en el elemento: {selector}')
