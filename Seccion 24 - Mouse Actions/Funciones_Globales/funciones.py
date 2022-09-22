@@ -51,6 +51,18 @@ class Funciones_Globales():
             tipo = By.XPATH
         elif tipo == 'id':
             tipo = By.ID
+        elif tipo == 'css' :
+            tipo = By.CSS_SELECTOR
+        elif tipo == 'tag':
+            tipo = By.TAG_NAME
+        elif tipo == 'class':
+            tipo = By.CLASS_NAME
+        elif tipo == 'name':
+            tipo == By.NAME
+        elif tipo == 'link':
+            tipo = By.LINK_TEXT
+        elif tipo == 'partial':
+            tipo == By.PARTIAL_LINK_TEXT
         return tipo
     
     def validar_elemento(self,tipo,selector):
@@ -58,6 +70,20 @@ class Funciones_Globales():
         val = self.driver.execute_script("arguments[0].scrollIntoView();",val)
         val = self.driver.find_element(tipo,selector)
         return val
+    
+    def validar_elemento_visible(self,tipo,selector,tiempo=.2):
+        tipo = Funciones_Globales.definir_tipo(tipo)
+        try:
+            val = Funciones_Globales.validar_elemento(self,tipo,selector)
+            print(f'Se encontro el elemento {selector}')
+            Funciones_Globales.Tiempo(self,tiempo)
+            val = True
+        except TOE as toe:
+            print(toe.msg)
+            print(f'No se enconto el elemento: {selector}')
+            val = False
+        finally:
+            return val
     
     def insertar_texto(self,tipo,selector,text,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -69,7 +95,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
 
     def Click_elemento(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -80,7 +106,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
     
     def Select_Lista(self,tipo,selector,op,sel,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -105,7 +131,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
         
     def Upload_File(self,tipo,selector,url,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -116,7 +142,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
 
     def CheckBox_RadioButton(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -127,7 +153,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
     
     def CheckBoxMul_RadioButton(self,tipo,selector,cantI,cantF,tiempo=.2):
         try:
@@ -156,7 +182,7 @@ class Funciones_Globales():
                                 Funciones_Globales.CheckBox_RadioButton(self,tipo,selector2,tiempo)
                         except TOE as toe:
                             print(toe.msg)
-                            print('No se enconto el elemento' + selector)
+                            print(f'No se enconto el elemento: {selector}')
                     else:
                         print('No se puede realizar el proceso ya que cantF es menor a cantI')
                 else:
@@ -168,20 +194,6 @@ class Funciones_Globales():
             print(toe.msg)
             print('hubo un error')
     
-    def validar_elemento_visible(self,tipo,selector,tiempo=.2):
-        tipo = Funciones_Globales.definir_tipo(tipo)
-        try:
-            val = Funciones_Globales.validar_elemento(self,tipo,selector)
-            print(f'Se encontro el elemento {selector}')
-            Funciones_Globales.Tiempo(self,tiempo)
-            val = True
-        except TOE as toe:
-            print(toe.msg)
-            print('No se enconto el elemento ' + selector)
-            val = False
-        finally:
-            return val
-    
     def doble_click_AC(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
         try:
@@ -192,7 +204,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
     
     def click_derecho_AC(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -204,7 +216,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
     
     def click_AC(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -216,4 +228,34 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print('No se enconto el elemento ' + selector)
+            print(f'No se enconto el elemento: {selector}')
+    
+    def DragDrop_AC(self,tipo,selectordrag,selectordrop,tiempo=2):
+        tipo = Funciones_Globales.definir_tipo(tipo)
+        try:
+            val = Funciones_Globales.validar_elemento(self,tipo,selectordrag)
+            val2 = Funciones_Globales.validar_elemento(self,tipo,selectordrop)
+            act = AC(self.driver)
+            act.drag_and_drop(val,val2).perform()
+            print(f'Se obtuvo el elemento {selectordrag} y se arrastro al campo: {selectordrop}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print('No se encontro uno o varios de los elementos ')
+    
+    def DragDropXY_AC(self,tipo,selectordrag,x,y,tiempo=2):
+        tipo = Funciones_Globales.definir_tipo(tipo)
+        try:
+            val = Funciones_Globales.validar_elemento_visible(self,tipo,selectordrag)
+            if val:
+                val = Funciones_Globales.validar_elemento(self,tipo,selectordrag)
+            else:
+                self.driver.switch_to.frame(0)
+                val = Funciones_Globales.validar_elemento(self,tipo,selectordrag)
+            act = AC(self.driver)
+            act.drag_and_drop_by_offset(val,x,y).perform()
+            print(f'Se obtuvo el elemento {selectordrag} y se arrastro a las coordenadas: {x} - {y}')
+            Funciones_Globales.Tiempo(self,tiempo)
+        except TOE as toe:
+            print(toe.msg)
+            print(f'No se encontro el elemento: {selectordrag} ')
