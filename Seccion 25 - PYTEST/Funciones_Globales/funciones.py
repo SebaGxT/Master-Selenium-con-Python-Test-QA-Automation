@@ -20,10 +20,20 @@ class Funciones_Globales():
         driver=webdriver.Chrome(chrome_options=ops)
         return driver
     
+    def driverCh2():
+        driver=webdriver.Chrome()
+        driver.maximize_window()
+        return driver
+    
     def driverChexe(url):
         ops = webdriver.ChromeOptions()
         ops.add_argument('--start-maximized')
         driver=webdriver.Chrome(chrome_options=ops,executable_path=url)
+        return driver
+    
+    def driverChexe2(url):
+        driver=webdriver.Chrome(executable_path=url)
+        driver.maximize_window()
         return driver
     
     def driverFi():

@@ -12,11 +12,12 @@ class mouse_test(unittest.TestCase):
         Fun = FG(dri)
     
     def test(self):
-        Fun.navegar('http://jqueryui.com/draggable/',t)
-        Fun.DragDropXY_AC("xpath","//div[@id='draggable']",150,120,4)
-        
+        Fun.navegar("https://jqueryui.com/")
+        Fun.ClickXY_AC(600,200,4)
+        Fun.Tiempo(5)
+
     def tearDown(self):
         dri.quit()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

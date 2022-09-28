@@ -12,11 +12,13 @@ class mouse_test(unittest.TestCase):
         Fun = FG(dri)
     
     def test(self):
-        Fun.navegar('http://jqueryui.com/draggable/',t)
-        Fun.DragDropXY_AC("xpath","//div[@id='draggable']",150,120,4)
+        Fun.navegar("https://demoqa.com/automation-practice-form")
+        Fun.insertar_texto("xpath","//input[contains(@id,'firstName')]","Ferrari")
+        Fun.copiar_pegar("xpath","//input[contains(@id,'firstName')]","//input[@id='lastName']",5)
         
+
     def tearDown(self):
         dri.quit()
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
