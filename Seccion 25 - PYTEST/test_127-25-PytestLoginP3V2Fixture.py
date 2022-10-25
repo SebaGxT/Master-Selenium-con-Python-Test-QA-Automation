@@ -1,14 +1,18 @@
 from Funciones_Globales.funciones import Funciones_Globales as FG
 
-global dri
-global Fun
-
-t = 1
-
-def test_login():
+def setup_function(function):
+    global dri
+    global Fun
+    global t
+    t = .1
     dri = FG.driverCh2()
     Fun = FG(dri)
     Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
+
+def teardown_function(function):
+    dri.quit()
+
+def test_login():
     Fun.insertar_texto('xpath',"//input[@id='Email']","admin@yoursto.com",t)
     Fun.insertar_texto('xpath',"//input[@id='Password']","admin",t)
     Fun.Click_elemento('xpath',"//button[@type='submit']",t)
@@ -18,12 +22,8 @@ def test_login():
         print("Prueba de validacion usuario exitosa")
     else:
         print("Prueba de validacion usuario incorrecta")
-    dri.quit()
-
+    
 def test_login2():
-    dri = FG.driverCh2()
-    Fun = FG(dri)
-    Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
     Fun.insertar_texto('xpath',"//input[@id='Email']"," ",t)
     Fun.insertar_texto('xpath',"//input[@id='Password']","admin",t)
     Fun.Click_elemento('xpath',"//button[@type='submit']",t)
@@ -33,12 +33,8 @@ def test_login2():
         print("Prueba de validacion usuario vacio exitosa")
     else:
         print("Prueba de validacion usuario vacio incorrecta")
-    dri.quit()
 
 def test_login3():
-    dri = FG.driverCh2()
-    Fun = FG(dri)
-    Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
     Fun.insertar_texto('xpath',"//input[@id='Email']","ad",t)
     Fun.insertar_texto('xpath',"//input[@id='Password']","admin",t)
     Fun.Click_elemento('xpath',"//button[@type='submit']",t)
@@ -48,12 +44,8 @@ def test_login3():
         print("Prueba de validacion email exitosa")
     else:
         print("Prueba de validacion email incorrecta")
-    dri.quit()
 
 def test_login4():
-    dri = FG.driverCh2()
-    Fun = FG(dri)
-    Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
     Fun.insertar_texto('xpath',"//input[@id='Email']","admin@yourstore.com",t)
     Fun.insertar_texto('xpath',"//input[@id='Password']","admin",t)
     Fun.Click_elemento('xpath',"//button[@type='submit']",t)
@@ -63,4 +55,3 @@ def test_login4():
         print("Prueba de ingreso exitosa")
     else:
         print("Prueba de ingreso incorrecta")
-    dri.quit()

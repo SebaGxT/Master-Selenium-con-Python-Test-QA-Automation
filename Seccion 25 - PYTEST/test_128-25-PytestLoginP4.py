@@ -1,11 +1,7 @@
-import pytest
 from Funciones_Globales.funciones import Funciones_Globales as FG
 from Funciones_Globales.funciones_Login import funciones_login as FL
 
 global dri
-global Fun
-
-t = 1
 
 def test_login():
     dri = FG.driverCh2()

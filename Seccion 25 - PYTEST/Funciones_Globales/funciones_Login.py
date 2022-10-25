@@ -1,14 +1,13 @@
 from Funciones_Globales.funciones import Funciones_Globales as FG
 
-global Fun
-
 class funciones_login():
 
     def __init__(self,driver):
         self.driver = driver
-        
-    def validacion_cuenta_activa(self,email,password,t=.1):
+        global Fun
         Fun = FG(self.driver)
+    
+    def validacion_cuenta_activa(self,email,password,t=.1):
         Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
         Fun.insertar_texto('xpath',"//input[@id='Email']",email,t)
         Fun.insertar_texto('xpath',"//input[@id='Password']",password,t)
@@ -21,7 +20,6 @@ class funciones_login():
             print("El Usuario existe")
 
     def validacion_email(self,email,password,t=.1):
-        Fun = FG(self.driver)
         Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
         Fun.insertar_texto('xpath',"//input[@id='Email']",email,t)
         Fun.insertar_texto('xpath',"//input[@id='Password']",password,t)
@@ -36,7 +34,6 @@ class funciones_login():
             print("Prueba de validacion email incorrecta")
     
     def validacion_password_incorrecto(self,email,password,t=.1):
-        Fun = FG(self.driver)
         Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
         Fun.insertar_texto('xpath',"//input[@id='Email']",email,t)
         Fun.insertar_texto('xpath',"//input[@id='Password']",password,t)
@@ -49,7 +46,6 @@ class funciones_login():
             print("La contraseña es correcta")
     
     def login_correcto(self,email,password,t=.1):
-        Fun = FG(self.driver)
         Fun.navegar('https://admin-demo.nopcommerce.com/login?ReturnUrl=%2Fadmin%2F',t)
         Fun.insertar_texto('xpath',"//input[@id='Email']",email,t)
         Fun.insertar_texto('xpath',"//input[@id='Password']",password,t)
