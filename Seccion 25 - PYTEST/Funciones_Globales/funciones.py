@@ -314,3 +314,4 @@ class Funciones_Globales():
         except TOE as toe:
             print(toe.msg)
             print(f'No se encontro un elemento ')
+    
