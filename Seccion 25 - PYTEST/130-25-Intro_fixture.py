@@ -1,7 +1,3 @@
-from Funciones_Globales.funciones import Funciones_Globales as FG
-
-global Fun
-
 def setup_function(function):
     print("\n\n Esto va al inicio de cada test \n")
 

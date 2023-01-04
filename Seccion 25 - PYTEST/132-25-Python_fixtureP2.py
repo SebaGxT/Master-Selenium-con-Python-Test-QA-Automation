@@ -29,7 +29,7 @@ def test_catalogo_agregarprod():
         Fun.insertar_texto("xpath","//input[@id='Name']","memory ram")
         Fun.insertar_texto("xpath","//textarea[@id='ShortDescription']","Hyper5x Fury")
         dri.switch_to.frame(0)
-        Fun.insertar_texto("id",'tinymce',"CCL 18 latenc4y 15 32 GB")
+        Fun.insertar_texto("id",'tinymce',"CCL 18 latency 4y 15 32 GB")
         dri.switch_to.default_content()
         Fun.insertar_texto("xpath","//input[@id='Sku']","352GB")
         Fun.click_AC("xpath","(//div[contains(@class,'k-multiselect-wrap k-floatwrap')])[1]")
