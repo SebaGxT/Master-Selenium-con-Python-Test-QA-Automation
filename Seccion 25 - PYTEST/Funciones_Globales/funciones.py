@@ -141,7 +141,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print(f'No se enconto el elemento: {selector}')
+            print(f'No se encontro el elemento: {selector}')
         
     def Upload_File(self,tipo,selector,url,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -152,7 +152,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print(f'No se enconto el elemento: {selector}')
+            print(f'No se encontro el elemento: {selector}')
 
     def CheckBox_RadioButton(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
@@ -163,7 +163,7 @@ class Funciones_Globales():
             Funciones_Globales.Tiempo(self,tiempo)
         except TOE as toe:
             print(toe.msg)
-            print(f'No se enconto el elemento: {selector}')
+            print(f'No se encontro el elemento: {selector}')
     
     def CheckBoxMul_RadioButton(self,tipo,selector,cantI,cantF,tiempo=.2):
         try:
@@ -192,7 +192,7 @@ class Funciones_Globales():
                                 Funciones_Globales.CheckBox_RadioButton(self,tipo,selector2,tiempo)
                         except TOE as toe:
                             print(toe.msg)
-                            print(f'No se enconto el elemento: {selector}')
+                            print(f'No se encontro el elemento: {selector}')
                     else:
                         print('No se puede realizar el proceso ya que cantF es menor a cantI')
                 else:
