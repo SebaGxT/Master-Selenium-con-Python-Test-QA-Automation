@@ -106,6 +106,20 @@ class Funciones_Globales():
         except TOE as toe:
             print(toe.msg)
             print(f'No se enconto el elemento: {selector}')
+    
+    def insertar_texto_mul(self,dic,text,tiempo=.2): #REVISAR - debo ver la forma de agregar selectores y textos a uno o mas arrays para insertar a varios campos
+        dic.tipo = Funciones_Globales.definir_tipo(dic.tipo)
+        for i in dic:
+            try:
+                val = Funciones_Globales.validar_elemento(self,dic.tipo,dic.selector)
+                val.clear()
+                val.send_keys(text)
+                print(f'Escribiendo en el campo {dic.selector} el texto: {text}')
+                Funciones_Globales.Tiempo(self,tiempo)
+            except TOE as toe:
+                print(toe.msg)
+                print(f'No se encontro el elemento: {dic.selector}')
+
 
     def Click_elemento(self,tipo,selector,tiempo=.2):
         tipo = Funciones_Globales.definir_tipo(tipo)
