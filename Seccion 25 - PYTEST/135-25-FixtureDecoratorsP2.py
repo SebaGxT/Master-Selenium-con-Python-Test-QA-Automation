@@ -1,5 +1,4 @@
 import pytest
-from selenium.webdriver import Keys
 from Funciones_Globales.funciones import Funciones_Globales as FG
 
 t = 1
